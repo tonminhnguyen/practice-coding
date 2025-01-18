@@ -7,5 +7,6 @@ void sendMessage()
 
 int main()
 {
-    printMessage();
+    sendMessage();
+    return 0;
 }

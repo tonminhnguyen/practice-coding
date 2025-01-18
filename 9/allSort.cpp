@@ -3,7 +3,7 @@
 //
 #include <iostream>
 
-// bubble sort
+// Bubble Sort
 void bubbleSort(int arr[], int size) {
     for (int i = 0; i < size - 1; ++i) {
         for (int j = 0; j < size - 1 - i; ++j) {
@@ -17,7 +17,7 @@ void bubbleSort(int arr[], int size) {
     }
 }
 
-// insertion sort
+// Insertion Sort
 void insertionSort(int arr[], int size) {
     for (int i = 1; i < size; ++i) {
         int key = arr[i];
@@ -60,6 +60,65 @@ void quickSort(int arr[], int low, int high) {
     }
 }
 
+// Merge two subarrays
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
+
+    // Create temporary arrays
+    int* L = new int[n1];
+    int* R = new int[n2];
+
+    for (int i = 0; i < n1; ++i)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; ++j)
+        R[j] = arr[mid + 1 + j];
+
+    // Merge the temporary arrays back into arr[left..right]
+    int i = 0;
+    int j = 0;
+    int k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            ++i;
+        } else {
+            arr[k] = R[j];
+            ++j;
+        }
+        ++k;
+    }
+
+    // Copy the remaining elements of L[], if any
+    while (i < n1) {
+        arr[k] = L[i];
+        ++i;
+        ++k;
+    }
+
+    // Copy the remaining elements of R[], if any
+    while (j < n2) {
+        arr[k] = R[j];
+        ++j;
+        ++k;
+    }
+
+    delete[] L;
+    delete[] R;
+}
+
+// Merge Sort
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        merge(arr, left, mid, right);
+    }
+}
+
 // Function to print the array
 void printArray(int arr[], int size) {
     for (int i = 0; i < size; ++i) {
@@ -95,6 +154,15 @@ int main() {
     quickSort(arr3, 0, size3 - 1);
     std::cout << "Sorted array using Quick Sort: ";
     printArray(arr3, size3);
+
+    int arr4[] = {64, 34, 25, 12, 22, 11, 90};
+    int size4 = sizeof(arr4) / sizeof(arr4[0]);
+
+    std::cout << "\nOriginal array for Merge Sort: ";
+    printArray(arr4, size4);
+    mergeSort(arr4, 0, size4 - 1);
+    std::cout << "Sorted array using Merge Sort: ";
+    printArray(arr4, size4);
 
     return 0;
 }

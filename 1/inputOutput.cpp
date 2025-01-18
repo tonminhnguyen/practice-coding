@@ -7,9 +7,9 @@ void getTwoInputs(int &a, int &b) {
         if (std::cin.fail()) {
             std::cout << "Invalid input" << std::endl;
             std::cin.clear();
-            std::cin.ignore(32767, '\n');
+            std::cin.ignore();
         } else {
-            std::cin.ignore(32767, '\n');
+            std::cin.ignore();
             break;
         }
     }
