@@ -4,6 +4,11 @@
 #include <iostream>
 using namespace std;
 
+// Stack is LIFO, linked list is a series of nodes linked together and
+// Idea is that each node in linked list represent an data in stack and the top of the stack is the first node of the linkedlist
+// when push -> create new node and add to the first of the linkedlist
+// when pop -> delete first node (which is the top of the stack)
+
 class StackNode {
 public:
     int data;
@@ -22,6 +27,7 @@ public:
         top = nullptr;
     }
 
+
     void push(int value) {
         StackNode* newNode = new StackNode(value);
         newNode->next = top;
@@ -31,22 +37,29 @@ public:
 
     void pop() {
         if (!top) {
-            cout << "stack is empty";
+            cout << "stack is empty" << endl;
             return;
         }
         StackNode* temp = top;
         top = top->next;
-        cout << temp->data << " popped out";
+        cout << temp->data << " popped out" << endl;
         delete temp;
     }
 
-    int peek() {
+    void display() {
         if (!top) {
-            cout << "empty stack";
-            return -1;
+            cout << "stack is empty" << endl;
+            return;
         }
-        return top->data;
+        StackNode* current = top;
+        cout << "Stack elements: ";
+        while (current != nullptr) {
+            cout << current->data << " ";
+            current = current->next;
+        }
+        cout << endl;
     }
+
 
     bool isEmpty() {
         return top == nullptr;
@@ -59,11 +72,13 @@ int main() {
     stack.push(20);
     stack.push(30);
 
-    cout << "top element is: " << stack.peek() << endl;
+    stack.display();
 
     stack.pop();
     stack.pop();
 
     cout << "stack empty: " << (stack.isEmpty() ? "yes" : "no") << endl;
+    stack.display();
+
     return 0;
 }

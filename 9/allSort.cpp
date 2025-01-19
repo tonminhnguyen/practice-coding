@@ -3,6 +3,24 @@
 //
 #include <iostream>
 
+// Selection Sort
+void selectionSort(int arr[], int size) {
+    for (int i = 0; i < size - 1; ++i) {
+        int minIdx = i;
+        for (int j = i + 1; j < size; ++j) {
+            if (arr[j] < arr[minIdx]) {
+                minIdx = j;
+            }
+        }
+        // Swap the found minimum element with the first element
+        if (minIdx != i) {
+            int temp = arr[i];
+            arr[i] = arr[minIdx];
+            arr[minIdx] = temp;
+        }
+    }
+}
+
 // Bubble Sort
 void bubbleSort(int arr[], int size) {
     for (int i = 0; i < size - 1; ++i) {
@@ -18,6 +36,9 @@ void bubbleSort(int arr[], int size) {
 }
 
 // Insertion Sort
+// Iterate from arr[1] to arr[n] on the array.
+// Compare the current element (key) with its previous element.
+// If the key element is smaller than the previous element, compare it with earlier elements. Move the larger elements one position forward to create space for the key to be swapped.
 void insertionSort(int arr[], int size) {
     for (int i = 1; i < size; ++i) {
         int key = arr[i];
@@ -51,6 +72,11 @@ int partition(int arr[], int low, int high) {
 }
 
 // Quick Sort
+// If the given array has one or fewer elements, it is considered sorted, and no further actions are needed.
+// If the array has more than one element, it is divided into two parts:
+// The left part contains all the elements less than a chosen pivot value (X).
+// The right part contains all the elements greater than or equal to the pivot value (X).
+// Then, the process is recursively applied to both the left and right subarrays until all subarrays contain one or fewer elements, which means the array is sorted.
 void quickSort(int arr[], int low, int high) {
     if (low < high) {
         int pi = partition(arr, low, high);
@@ -158,6 +184,12 @@ int main() {
     int arr4[] = {64, 34, 25, 12, 22, 11, 90};
     int size4 = sizeof(arr4) / sizeof(arr4[0]);
 
+    // If the array has one or no elements, it's already sorted. Do nothing.
+    // If the array has more than one element:
+    // Split the array into two equal parts.
+    // Sort each of the two parts.
+    // Merge the two sorted parts back into a single sorted array with the original size.
+    // space O(n) time O(nlogN)
     std::cout << "\nOriginal array for Merge Sort: ";
     printArray(arr4, size4);
     mergeSort(arr4, 0, size4 - 1);

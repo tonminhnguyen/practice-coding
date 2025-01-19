@@ -40,6 +40,18 @@ public:
         return arr[top];
     }
 
+    void display() {
+        if (top < 0) {
+            cout << "stack is empty\n";
+            return;
+        }
+        cout << "Stack elements: ";
+        for (int i = 0; i <= top; i++) {
+            cout << arr[i] << " ";
+        }
+        cout << endl;
+    }
+
     bool isEmpty() {
         return top < 0;
     }
